@@ -1,14 +1,14 @@
 'use strict'
 
 let path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
     context: __dirname + '/src',
     mode: 'development',
     entry: './index.ts',
-    watch: true,
     module: {
         rules: [
             {
@@ -18,8 +18,8 @@ module.exports = {
         ],
     },
     output: {
-        filename: '[name].[hash].js',
-        path: __dirname + '/dist',
+        filename: 'bundle.js',
+        path: __dirname + '/testing',
         clean: true,
         library: 'spotify-api',
         libraryExport: 'default',
@@ -31,9 +31,29 @@ module.exports = {
     },
     devtool: "source-map",
     devServer: {
+        static: {
+            directory: path.join(__dirname, 'testing'),
+        },
+        devMiddleware: {
+            index: true,
+            mimeTypes: {phtml: 'text/html'},
+            publicPath: '/publicPathForDevServe',
+            serverSideRender: true,
+            writeToDisk: true,
+        },
+        hot: false,
         compress: false,
         port: 5050,
-        open: true,
+        open: ['/index.html'],
+        onListening: function (devServer) {
+            if (!devServer) {
+                throw new Error('webpack-dev-server is not defined');
+            }
+
+            const port = devServer.server.address().port;
+            console.log('Listening on port:', port);
+        },
     },
-    plugins: [new ESLintPlugin({extensions: ['ts']})],
+    plugins: [new ESLintPlugin({extensions: ['ts']}),
+        new HtmlWebpackPlugin({title: 'Output Management',}),],
 };

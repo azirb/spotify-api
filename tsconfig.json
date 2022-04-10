@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "module": "system",
+    "outDir": "./dist/",
     "noImplicitAny": true,
-    "removeComments": false,
-    "preserveConstEnums": true,
-    "outFile": "../../built/local/tsc.js",
+    "module": "es6",
+    "target": "es6",
+    "allowJs": true,
+    "moduleResolution": "node",
     "sourceMap": true
   },
   "include": ["src/**/*"],
