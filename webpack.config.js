@@ -1,8 +1,6 @@
 'use strict'
 
 let path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
@@ -54,6 +52,5 @@ module.exports = {
             console.log('Listening on port:', port);
         },
     },
-    plugins: [new ESLintPlugin({extensions: ['ts']}),
-        new HtmlWebpackPlugin({title: 'Output Management',}),],
+    plugins: [new ESLintPlugin({extensions: ['ts']})],
 };

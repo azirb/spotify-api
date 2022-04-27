@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "axios": "^0.26.1",
-    "html-webpack-plugin": "^5.5.0"
+    "html-webpack-plugin": "^5.5.0",
+    "typedoc": "^0.22.15"
   }
 }
